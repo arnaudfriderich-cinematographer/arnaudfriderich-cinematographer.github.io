@@ -12,6 +12,14 @@
 window.PORTFOLIO = {
   name: "Arnaud Friderich",
   role: "Directeur de la photographie",
+  tagline: "Cinematographer", // sous le nom, en haut de la page ("" pour le masquer)
+
+  // Texte de l'onglet Bio du menu : un paragraphe par ligne
+  bio: [
+    "Arnaud Friderich est chef opérateur en beauty, mode et still life pour le luxe. Il éclaire les visages, les vêtements et les objets avec un vrai souci du détail, et une image qui a du cachet.",
+    "Sa lumière accompagne des maisons comme Miu Miu, Lancôme, Dior et Loewe.",
+    "Basé en France.",
+  ],
 
   // Laisser vide ("") pour masquer une ligne.
   contact: {

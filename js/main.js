@@ -44,6 +44,10 @@
 
   $$("[data-name]").forEach((n) => (n.textContent = D.name));
   $$("[data-role]").forEach((n) => (n.textContent = D.role));
+  $$("[data-tagline]").forEach((n) => {
+    if (D.tagline) n.textContent = D.tagline;
+    else n.remove();
+  });
   $("#year").textContent = new Date().getFullYear();
 
   // Instagram, e-mail… : des icônes cliquables, dans le menu et en bas de page
@@ -92,8 +96,7 @@
   const scrim = $("#scrim");
   const burger = $("#nav-burger");
   let flyoutOpen = false;
-  let contactToggle = null;
-  let contactPanel = null;
+  const panels = []; // onglets qui se déplient dans le menu (Bio, Contact)
 
   function buildFlyout() {
     const inner = $("#flyout-inner");
@@ -111,22 +114,32 @@
         el("a", { class: "menu-link", href: "#films", "data-filter": c.id, text: c.label }))));
     });
 
-    if (hasContact()) {
-      contactToggle = el("button", { class: "menu-link", type: "button", "aria-expanded": "false", "aria-controls": "menu-contact" }, "Contact");
-      contactToggle.insertAdjacentHTML("beforeend",
+    const addPanel = (id, label, content) => {
+      const toggle = el("button", { class: "menu-link", type: "button", "aria-expanded": "false", "aria-controls": `menu-${id}` }, label);
+      toggle.insertAdjacentHTML("beforeend",
         '<svg class="chev" viewBox="0 0 14 9" aria-hidden="true"><path d="M1.5 1.5L7 7l5.5-5.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>');
-      contactPanel = el("div", { class: "menu-contact", id: "menu-contact" }, el("div", {}, contactIcons()));
-      contactToggle.addEventListener("click", () => setContact(contactToggle.getAttribute("aria-expanded") !== "true"));
-      list.append(item(el("li", {}, contactToggle, contactPanel)));
+      const panel = el("div", { class: `menu-panel menu-${id}`, id: `menu-${id}` }, el("div", {}, content));
+      const entry = { toggle, panel };
+      toggle.addEventListener("click", () => openPanel(toggle.getAttribute("aria-expanded") === "true" ? null : entry));
+      panels.push(entry);
+      list.append(item(el("li", {}, toggle, panel)));
+    };
+
+    if (D.bio && D.bio.length) {
+      addPanel("bio", "Bio", el("div", { class: "menu-bio" }, ...D.bio.map((t) => el("p", { text: t }))));
     }
+    if (hasContact()) addPanel("contact", "Contact", contactIcons());
 
     inner.append(list);
   }
 
-  function setContact(open) {
-    if (!contactToggle) return;
-    contactToggle.setAttribute("aria-expanded", String(open));
-    contactPanel.classList.toggle("is-open", open);
+  // Un seul onglet ouvert à la fois ; openPanel(null) les referme tous
+  function openPanel(target) {
+    panels.forEach((p) => {
+      const open = p === target;
+      p.toggle.setAttribute("aria-expanded", String(open));
+      p.panel.classList.toggle("is-open", open);
+    });
   }
 
   function setFlyout(open) {
@@ -138,7 +151,7 @@
     burger.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
     flyout.setAttribute("aria-hidden", String(!open));
     document.body.classList.toggle("is-locked", open && isMobileNav());
-    if (!open) setTimeout(() => { if (!flyoutOpen) setContact(false); }, 450);
+    if (!open) setTimeout(() => { if (!flyoutOpen) openPanel(null); }, 450);
   }
 
   buildFlyout();

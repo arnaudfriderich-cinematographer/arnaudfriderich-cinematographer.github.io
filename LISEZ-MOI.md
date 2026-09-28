@@ -6,6 +6,7 @@ Double-cliquer sur `index.html` : il s'ouvre dans le navigateur, sans installati
 
 ## Modifier le contenu
 Tout est dans **`js/data.js`** :
+- `bio` : le texte de l'onglet Bio du menu (un paragraphe par ligne)
 - `contact` : Instagram, e-mail (affichés en icônes cliquables), téléphone, agent. Un champ vide n'est pas affiché
 - `clients` : la liste des marques (en bas de page, avec les réalisateurs et le contact)
 - `projects` : les films (titre, réalisateur, catégorie, format)

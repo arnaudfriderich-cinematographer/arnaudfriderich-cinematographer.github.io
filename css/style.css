@@ -90,10 +90,21 @@ ul { list-style: none; }
 .nav-role { grid-column: 1; justify-self: start; font-size: 15px; opacity: 0.92; }
 .nav-name {
   grid-column: 2; justify-self: center;
+  display: flex; flex-direction: column; align-items: center;
   font-size: clamp(19px, 1.95vw, 28px);
+  line-height: 1.1;
   letter-spacing: 0.01em;
   white-space: nowrap;
 }
+.nav-tagline {
+  margin-top: 3px;
+  font-size: clamp(12px, 0.95vw, 14px);
+  letter-spacing: 0.04em;
+  opacity: 0.9;
+}
+/* Ombre discrète pour rester lisible sur les images claires */
+.nav-role, .nav-name { text-shadow: 0 1px 14px rgba(0, 0, 0, 0.28); }
+.nav.is-open .nav-role, .nav.is-open .nav-name { text-shadow: none; }
 
 .nav-burger {
   grid-column: 3; justify-self: end;
@@ -153,14 +164,24 @@ ul { list-style: none; }
 }
 .menu-link[aria-expanded="true"] .chev { transform: rotate(180deg); }
 
-/* Onglet Contact : se déplie sous le lien */
-.menu-contact {
+/* Onglets Bio et Contact : se déplient sous le lien */
+.menu-panel {
   display: grid; grid-template-rows: 0fr;
   transition: grid-template-rows 0.55s var(--ease-sheet);
 }
-.menu-contact.is-open { grid-template-rows: 1fr; }
-.menu-contact > div { overflow: hidden; }
+.menu-panel.is-open { grid-template-rows: 1fr; }
+.menu-panel > div { overflow: hidden; }
 .menu-contact .contact-icons { padding: 18px 0 6px; }
+
+.menu-bio { max-width: 36em; padding: 14px 0 10px; }
+.menu-bio p {
+  font-size: clamp(17px, 1.45vw, 21px);
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+  color: #e8e8ed;
+  text-wrap: pretty;
+}
+.menu-bio p + p { margin-top: 0.75em; }
 .menu-list .contact-icons li { margin-top: 0; }
 
 /* Icônes de contact : un clic ouvre Instagram ou la messagerie */
@@ -449,6 +470,7 @@ ul { list-style: none; }
   .nav-role { display: none; }
   .nav-bar { grid-template-columns: 44px 1fr 44px; }
   .nav-name { font-size: 18px; }
+  .nav-tagline { font-size: 11px; margin-top: 2px; }
 
   .flyout { height: 100svh; overflow-y: auto; overscroll-behavior: contain; }
   .flyout-inner { padding: calc(var(--nav-h) + 28px) 28px 56px; }
