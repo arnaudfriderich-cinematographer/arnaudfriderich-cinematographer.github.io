@@ -43,7 +43,6 @@
   /* ---------- Textes ---------- */
 
   $$("[data-name]").forEach((n) => (n.textContent = D.name));
-  $$("[data-role]").forEach((n) => (n.textContent = D.role));
   $$("[data-tagline]").forEach((n) => {
     if (D.tagline) n.textContent = D.tagline;
     else n.remove();

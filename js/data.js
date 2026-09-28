@@ -11,7 +11,6 @@
 */
 window.PORTFOLIO = {
   name: "Arnaud Friderich",
-  role: "Directeur de la photographie",
   tagline: "Cinematographer", // sous le nom, en haut de la page ("" pour le masquer)
 
   // Texte de l'onglet Bio du menu : un paragraphe par ligne
