@@ -64,7 +64,12 @@
       out.push({ icon: "instagram", label: "Instagram", detail: `@${handle}`, href: `https://www.instagram.com/${handle}/`, external: true });
     }
     if (c.email) out.push({ icon: "email", label: "E-mail", detail: c.email, href: `mailto:${c.email}` });
-    if (c.phone) out.push({ icon: "phone", label: "Téléphone", detail: c.phone, href: `tel:${c.phone.replace(/\s/g, "")}` });
+    if (c.phone) {
+      // Numéro français (06…) → format international (+33 6…) pour appeler aussi depuis l'étranger
+      const digits = c.phone.replace(/[^\d+]/g, "");
+      const tel = /^0\d{9}$/.test(digits) ? `+33${digits.slice(1)}` : digits;
+      out.push({ icon: "phone", label: "Téléphone", detail: c.phone, href: `tel:${tel}` });
+    }
     return out;
   }
 
@@ -125,7 +130,7 @@
     };
 
     if (D.bio && D.bio.length) {
-      addPanel("bio", "Bio", el("div", { class: "menu-bio" }, ...D.bio.map((t) => el("p", { text: t }))));
+      addPanel("bio", "Bio", el("div", { class: "menu-bio-text" }, ...D.bio.map((t) => el("p", { text: t }))));
     }
     if (hasContact()) addPanel("contact", "Contact", contactIcons());
 

@@ -24,7 +24,7 @@ window.PORTFOLIO = {
   contact: {
     instagram: "arnaud_friderich",
     email: "arnaudfriderichtarrisse@gmail.com",
-    phone: "",
+    phone: "06 18 13 33 94",
     agent: "",
   },
 

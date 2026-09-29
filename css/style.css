@@ -172,15 +172,15 @@ ul { list-style: none; }
 .menu-panel > div { overflow: hidden; }
 .menu-contact .contact-icons { padding: 18px 0 6px; }
 
-.menu-bio { max-width: 36em; padding: 14px 0 10px; }
-.menu-bio p {
+.menu-bio-text { max-width: 36em; padding: 14px 0 10px; }
+.menu-bio-text p {
   font-size: clamp(17px, 1.45vw, 21px);
   line-height: 1.5;
   letter-spacing: -0.005em;
   color: #e8e8ed;
   text-wrap: pretty;
 }
-.menu-bio p + p { margin-top: 0.75em; }
+.menu-bio-text p + p { margin-top: 0.75em; }
 .menu-list .contact-icons li { margin-top: 0; }
 
 /* Icônes de contact : un clic ouvre Instagram ou la messagerie */
