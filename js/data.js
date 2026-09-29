@@ -7,18 +7,28 @@
     3. une image dans media/posters/<slug>.jpg (+ <slug>-sm.jpg en 960 px)
     4. ajouter une entrée dans projects, puis lui donner sa place dans layout (en bas du fichier).
 
+  producer : la société de production ("" si inconnue)
   ratio : largeur / hauteur de la vidéo (16/9, 9/16, 2.39…). La vignette garde ce format.
 */
 window.PORTFOLIO = {
   name: "Arnaud Friderich",
   tagline: "Cinematographer", // sous le nom, en haut de la page ("" pour le masquer)
 
-  // Texte de l'onglet Bio du menu : un paragraphe par ligne
-  bio: [
-    "Arnaud Friderich est chef opérateur en beauty, mode et still life pour le luxe. Il éclaire les visages, les vêtements et les objets avec un vrai souci du détail, et une image qui a du cachet.",
-    "Sa lumière accompagne des maisons comme Miu Miu, Lancôme, Dior et Loewe.",
-    "Basé en France.",
-  ],
+  // Texte de l'onglet Bio du menu, en français et en anglais : un paragraphe par ligne
+  bio: {
+    fr: [
+      "Je suis chef opérateur en beauty, mode et still life pour le luxe.",
+      "J’aime éclairer les visages, les vêtements et les objets avec un vrai souci du détail, et chercher pour chaque projet une image qui a du cachet.",
+      "Ma lumière accompagne des maisons comme Miu Miu, Lancôme, Dior et Loewe.",
+      "Basé à Paris.",
+    ],
+    en: [
+      "I’m a cinematographer working in beauty, fashion and still life for luxury brands.",
+      "I love lighting faces, garments and objects with real attention to detail, and finding an image with character for every project.",
+      "I’ve worked with houses such as Miu Miu, Lancôme, Dior and Loewe.",
+      "Based in Paris.",
+    ],
+  },
 
   // Laisser vide ("") pour masquer une ligne.
   contact: {
@@ -42,27 +52,27 @@ window.PORTFOLIO = {
 
   projects: [
     // Beauty / Mode
-    { slug: "lancome-community", title: "Lancôme Community", director: "Calvin Pausania", category: "commercial", ratio: 16 / 9 },
-    { slug: "jean-paul-gaultier", title: "Jean Paul Gaultier", director: "Megane & Hugo", category: "commercial", ratio: 16 / 9 },
-    { slug: "yves-saint-laurent", title: "Saint Laurent", director: "", category: "commercial", ratio: 16 / 9 },
-    { slug: "loreal-hairstyle", title: "L’Oreal Hairstyle", director: "Samy Djazoubi", category: "commercial", ratio: 16 / 9 },
-    { slug: "miumiu-x-adele-castillon", title: "MiuMiu X Adèle Castillon", director: "Thibault Della Gaspera", category: "commercial", ratio: 9 / 16 },
+    { slug: "lancome-community", title: "Lancôme Community", director: "Calvin Pausania", producer: "Helmut Production", category: "commercial", ratio: 16 / 9 },
+    { slug: "jean-paul-gaultier", title: "Jean Paul Gaultier", director: "Megane & Hugo", producer: "Burning Love", category: "commercial", ratio: 16 / 9 },
+    { slug: "yves-saint-laurent", title: "Saint Laurent", director: "", producer: "", category: "commercial", ratio: 16 / 9 },
+    { slug: "loreal-hairstyle", title: "L’Oreal Hairstyle", director: "Samy Djazoubi", producer: "Helmut Production", category: "commercial", ratio: 16 / 9 },
+    { slug: "miumiu-x-adele-castillon", title: "MiuMiu X Adèle Castillon", director: "Thibault Della Gaspera", producer: "Condé Nast", category: "commercial", ratio: 9 / 16 },
 
     // Still life
-    { slug: "miumiu-fleur-de-lait", title: "MiuMiu Fleur de Lait", director: "Onirim", category: "commercial", ratio: 16 / 9 },
-    { slug: "ormaie", title: "ORMAIE", director: "Stan Desjeux", category: "commercial", ratio: 16 / 9 },
-    { slug: "loewe", title: "Loewe", director: "Adrien Sgandurra", category: "commercial", ratio: 16 / 9 },
-    { slug: "kitesy-martin", title: "KITESY Martin", director: "Megane & Hugo", category: "commercial", ratio: 16 / 9 },
-    { slug: "la-grande-dame-rose-2018", title: "La Grande Dame Rosé 2018", director: "Onirim", category: "commercial", ratio: 9 / 16 },
-    { slug: "maison-francis-kurkdjian-kurky", title: "Maison Francis Kurkdjian Capsule Kurky", director: "Stan Desjeux", category: "commercial", ratio: 16 / 9 },
-    { slug: "bend-trippy", title: "BEND-TRIPPY", director: "Leonard Oliviero", category: "commercial", ratio: 16 / 9 },
+    { slug: "miumiu-fleur-de-lait", title: "MiuMiu Fleur de Lait", director: "Onirim", producer: "Onirim", category: "commercial", ratio: 16 / 9 },
+    { slug: "ormaie", title: "ORMAIE", director: "Stan Desjeux", producer: "", category: "commercial", ratio: 16 / 9 },
+    { slug: "loewe", title: "Loewe", director: "Adrien Sgandurra", producer: "Marlowe", category: "commercial", ratio: 16 / 9 },
+    { slug: "kitesy-martin", title: "KITESY Martin", director: "Megane & Hugo", producer: "Maison Montcalm", category: "commercial", ratio: 16 / 9 },
+    { slug: "la-grande-dame-rose-2018", title: "La Grande Dame Rosé 2018", director: "Onirim", producer: "Onirim", category: "commercial", ratio: 9 / 16 },
+    { slug: "maison-francis-kurkdjian-kurky", title: "Maison Francis Kurkdjian Capsule Kurky", director: "Stan Desjeux", producer: "Marie Valat", category: "commercial", ratio: 16 / 9 },
+    { slug: "bend-trippy", title: "BEND-TRIPPY", director: "Leonard Oliviero", producer: "Obvious", category: "commercial", ratio: 16 / 9 },
 
     // Art Film
-    { slug: "manifeste", title: "Manifeste", director: "Stan Desjeux", category: "art", ratio: 16 / 9 },
-    { slug: "learning-of-gesture-expression", title: "LEARNING OF GESTURE EXPRESSION", director: "Mathilde Hiley", category: "art", ratio: 16 / 9 },
+    { slug: "manifeste", title: "Manifeste", director: "Stan Desjeux", producer: "Maison Noire", category: "art", ratio: 16 / 9 },
+    { slug: "learning-of-gesture-expression", title: "LEARNING OF GESTURE EXPRESSION", director: "Mathilde Hiley", producer: "", category: "art", ratio: 16 / 9 },
 
     // Narrative
-    { slug: "drive-baby-drive", title: "Drive Baby Drive", director: "Christian Maverick", category: "narrative", ratio: 2048 / 858 },
+    { slug: "drive-baby-drive", title: "Drive Baby Drive", director: "Christian Maverick", producer: "Studio Hauteville", category: "narrative", ratio: 2048 / 858 },
   ],
 
   /*

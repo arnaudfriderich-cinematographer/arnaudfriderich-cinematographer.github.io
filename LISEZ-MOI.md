@@ -6,10 +6,10 @@ Double-cliquer sur `index.html` : il s'ouvre dans le navigateur, sans installati
 
 ## Modifier le contenu
 Tout est dans **`js/data.js`** :
-- `bio` : le texte de l'onglet Bio du menu (un paragraphe par ligne)
+- `bio` : le texte de l'onglet Bio du menu, en français (`fr`) et en anglais (`en`), un paragraphe par ligne
 - `contact` : Instagram, e-mail (affichés en icônes cliquables), téléphone, agent. Un champ vide n'est pas affiché
 - `clients` : la liste des marques (en bas de page, avec les réalisateurs et le contact)
-- `projects` : les films (titre, réalisateur, catégorie, format)
+- `projects` : les films (titre, réalisateur, production, catégorie, format)
 - `layout` : la place et la taille de chaque film dans la grille (1 film par ligne = pleine largeur,
   2 = moitié, 3 = tiers, ou un film vertical en grand à côté de deux films empilés)
 

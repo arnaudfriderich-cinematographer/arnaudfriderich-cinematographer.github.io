@@ -26,7 +26,7 @@
       else if (k === "text") n.textContent = v;
       else n.setAttribute(k, v === true ? "" : v);
     }
-    n.append(...children);
+    n.append(...children.filter((c) => c != null && c !== false));
     return n;
   }
 
@@ -129,8 +129,29 @@
       list.append(item(el("li", {}, toggle, panel)));
     };
 
-    if (D.bio && D.bio.length) {
-      addPanel("bio", "Bio", el("div", { class: "menu-bio-text" }, ...D.bio.map((t) => el("p", { text: t }))));
+    const bio = Array.isArray(D.bio) ? { fr: D.bio } : D.bio || {};
+    const langs = Object.keys(bio).filter((l) => bio[l] && bio[l].length);
+    if (langs.length) {
+      // Langue du navigateur si disponible, sinon l'anglais
+      const nav = (navigator.language || "").slice(0, 2);
+      let lang = langs.includes(nav) ? nav : langs.includes("en") ? "en" : langs[0];
+      const text = el("div", { class: "menu-bio-text" });
+      const switcher = langs.length > 1
+        ? el("div", { class: "lang-switch", role: "group", "aria-label": "Langue / Language" },
+          ...langs.map((l) => el("button", { type: "button", "data-lang": l, "aria-pressed": "false", text: l.toUpperCase() })))
+        : null;
+      const render = (l) => {
+        lang = l;
+        text.lang = l;
+        text.replaceChildren(...bio[l].map((t) => el("p", { text: t })));
+        if (switcher) $$("button", switcher).forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === l)));
+      };
+      if (switcher) switcher.addEventListener("click", (e) => {
+        const b = e.target.closest("button[data-lang]");
+        if (b) render(b.dataset.lang);
+      });
+      render(lang);
+      addPanel("bio", "Bio", el("div", {}, switcher, text));
     }
     if (hasContact()) addPanel("contact", "Contact", contactIcons());
 
@@ -211,8 +232,9 @@
     }),
     el("div", { class: "tile-shade" }),
     el("div", { class: "tile-text", "aria-hidden": "true" },
-      el("h3", { class: "tile-title condensed", text: p.title }),
-      p.director ? el("p", { class: "tile-dir", text: p.director }) : ""));
+      el("h3", { class: "tile-title display", text: p.title }),
+      p.director ? el("p", { class: "tile-dir", text: p.director }) : null,
+      p.producer ? el("p", { class: "tile-prod", text: `Produced by ${p.producer}` }) : null));
     tile.style.setProperty("--r", p.ratio);
     tile._p = p;
     tile.addEventListener("click", (e) => {
@@ -516,6 +538,18 @@
   let lastFocus = null;
   let idleTimer = 0;
   let seeking = false;
+  const card = $("#player-card");
+  const infoBtn = $("#player-info-btn");
+  let cardTimer = 0;
+
+  // Fiche réalisation / production : affichée quelques secondes à l'ouverture, ou épinglée avec le bouton i
+  function showCard(on, { auto = false } = {}) {
+    clearTimeout(cardTimer);
+    card.classList.toggle("is-on", on);
+    card.setAttribute("aria-hidden", String(!on));
+    infoBtn.setAttribute("aria-expanded", String(on && !auto));
+    if (on && auto) cardTimer = setTimeout(() => showCard(false), 4500);
+  }
 
   const fmt = (s) => {
     if (!isFinite(s)) return "0:00";
@@ -533,6 +567,15 @@
     $("#player-cat").textContent = catLabel[p.category] || "";
     $("#player-title").textContent = p.title;
     $("#player-dir").textContent = p.director;
+    $("#player-prod").textContent = p.producer ? `Produced by ${p.producer}` : "";
+    $("#card-title").textContent = p.title;
+    $("#card-dir").textContent = p.director;
+    $("#card-prod").textContent = p.producer || "";
+    $("#card-dir-row").hidden = !p.director;
+    $("#card-prod-row").hidden = !p.producer;
+    infoBtn.hidden = !p.director && !p.producer;
+    if (infoBtn.hidden) showCard(false);
+    else showCard(true, { auto: true });
     seek.value = 0;
     seek.style.setProperty("--p", "0%");
     tCur.textContent = "0:00";
@@ -565,6 +608,7 @@
     player.setAttribute("aria-hidden", "true");
     document.body.classList.remove("is-locked");
     pv.pause();
+    showCard(false);
     setTimeout(() => {
       if (playerIsOpen) return;
       pv.removeAttribute("src");
@@ -576,6 +620,7 @@
   }
 
   const togglePlay = () => (pv.paused || pv.ended ? safePlay(pv) : pv.pause());
+  infoBtn.addEventListener("click", () => showCard(infoBtn.getAttribute("aria-expanded") !== "true"));
 
   function wake() {
     stage.classList.remove("is-idle");
@@ -643,6 +688,8 @@
         wake();
       } else if (e.key === "m") {
         pv.muted = !pv.muted;
+      } else if (e.key === "i" && !infoBtn.hidden) {
+        showCard(infoBtn.getAttribute("aria-expanded") !== "true");
       } else if (e.key === "f") {
         $("#ctrl-fs").click();
       } else if (e.key === "Tab") {

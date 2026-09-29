@@ -15,7 +15,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..700&family=Inter+Tight:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,400;0,500;1,400&family=Cinzel:wght@400;600&display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -83,6 +83,14 @@
       </button>
       <div class="player-stage" id="player-stage">
         <video class="player-video" id="player-video" playsinline preload="auto"></video>
+        <!-- Fiche : réalisation et production, affichée à l'ouverture et via le bouton i -->
+        <div class="player-card" id="player-card" aria-hidden="true">
+          <p class="player-card-title display" id="card-title"></p>
+          <dl>
+            <div id="card-dir-row"><dt>Directed by</dt><dd id="card-dir"></dd></div>
+            <div id="card-prod-row"><dt>Produced by</dt><dd id="card-prod"></dd></div>
+          </dl>
+        </div>
         <button class="player-bigplay" id="player-bigplay" aria-label="Lecture">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>
         </button>
@@ -106,10 +114,14 @@
       <div class="player-info">
         <div class="player-meta">
           <p class="player-cat" id="player-cat"></p>
-          <h2 class="player-title condensed" id="player-title"></h2>
+          <h2 class="player-title display" id="player-title"></h2>
           <p class="player-dir" id="player-dir"></p>
+          <p class="player-prod" id="player-prod"></p>
         </div>
         <div class="player-nav">
+          <button class="round-btn" id="player-info-btn" aria-label="Réalisation et production" aria-expanded="false" aria-controls="player-card">
+            <svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="3.6" r="1.05" fill="currentColor"/><path d="M7 6.3v4.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </button>
           <button class="round-btn" id="player-prev" aria-label="Film précédent">
             <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M8.5 3L4.5 7l4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
