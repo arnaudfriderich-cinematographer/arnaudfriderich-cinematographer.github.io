@@ -29,7 +29,7 @@ window.PORTFOLIO = {
   },
 
   clients: [
-    "Jean Paul Gaultier", "Miu Miu", "Yves Saint Laurent", "Loewe", "Lancôme", "L’Oréal",
+    "Jean Paul Gaultier", "Miu Miu", "Saint Laurent", "Loewe", "Lancôme", "L’Oréal",
     "Maison Francis Kurkdjian", "Veuve Clicquot", "Ormaie", "Kitesy",
   ],
 
@@ -44,7 +44,7 @@ window.PORTFOLIO = {
     // Beauty / Mode
     { slug: "lancome-community", title: "Lancôme Community", director: "Calvin Pausania", category: "commercial", ratio: 16 / 9 },
     { slug: "jean-paul-gaultier", title: "Jean Paul Gaultier", director: "Megane & Hugo", category: "commercial", ratio: 16 / 9 },
-    { slug: "yves-saint-laurent", title: "Yves Saint Laurent", director: "", category: "commercial", ratio: 16 / 9 },
+    { slug: "yves-saint-laurent", title: "Saint Laurent", director: "", category: "commercial", ratio: 16 / 9 },
     { slug: "loreal-hairstyle", title: "L’Oreal Hairstyle", director: "Samy Djazoubi", category: "commercial", ratio: 16 / 9 },
     { slug: "miumiu-x-adele-castillon", title: "MiuMiu X Adèle Castillon", director: "Thibault Della Gaspera", category: "commercial", ratio: 9 / 16 },
 
