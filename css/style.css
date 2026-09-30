@@ -499,8 +499,18 @@ ul { list-style: none; }
 .player-card dt { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .player-card dd { margin-top: 2px; font-size: 15px; font-weight: 500; }
 .player-card [hidden] { display: none; }
-#player-info-btn[aria-expanded="true"] { background: var(--fg); color: #000; }
-#player-info-btn[hidden] { display: none; }
+/* Bouton Info : ouvre la fiche réalisation / production */
+.info-btn {
+  height: 36px; padding: 0 16px; border-radius: 999px;
+  background: var(--btn); color: #e8e8ed;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: background-color 0.2s, color 0.2s;
+}
+.info-btn:hover { background: var(--btn-hover); color: #fff; }
+.info-btn[aria-expanded="true"] { background: var(--fg); color: #000; }
+.info-btn[hidden] { display: none; }
 .player-nav { display: flex; gap: 10px; flex: none; }
 
 /* ==========================================================================

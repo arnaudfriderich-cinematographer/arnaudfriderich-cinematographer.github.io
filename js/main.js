@@ -540,15 +540,12 @@
   let seeking = false;
   const card = $("#player-card");
   const infoBtn = $("#player-info-btn");
-  let cardTimer = 0;
 
-  // Fiche réalisation / production : affichée quelques secondes à l'ouverture, ou épinglée avec le bouton i
-  function showCard(on, { auto = false } = {}) {
-    clearTimeout(cardTimer);
+  // Fiche réalisation / production : s'ouvre et se ferme avec le bouton Info
+  function showCard(on) {
     card.classList.toggle("is-on", on);
     card.setAttribute("aria-hidden", String(!on));
-    infoBtn.setAttribute("aria-expanded", String(on && !auto));
-    if (on && auto) cardTimer = setTimeout(() => showCard(false), 4500);
+    infoBtn.setAttribute("aria-expanded", String(on));
   }
 
   const fmt = (s) => {
@@ -573,9 +570,10 @@
     $("#card-prod").textContent = p.producer || "";
     $("#card-dir-row").hidden = !p.director;
     $("#card-prod-row").hidden = !p.producer;
+    // Fermée à l'ouverture d'un film ; reste ouverte si on passe au film suivant avec la fiche affichée
+    const keepCard = playerIsOpen && infoBtn.getAttribute("aria-expanded") === "true";
     infoBtn.hidden = !p.director && !p.producer;
-    if (infoBtn.hidden) showCard(false);
-    else showCard(true, { auto: true });
+    showCard(keepCard && !infoBtn.hidden);
     seek.value = 0;
     seek.style.setProperty("--p", "0%");
     tCur.textContent = "0:00";
